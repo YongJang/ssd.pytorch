@@ -53,6 +53,7 @@ parser.add_argument('--save_folder', default='weights/',
                     help='Directory for saving checkpoint models')
 args = parser.parse_args()
 
+os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 
 if torch.cuda.is_available():
     if args.cuda:
@@ -96,7 +97,6 @@ def train():
     net = ssd_net
 
     if args.cuda:
-        net = torch.nn.DataParallel(ssd_net)
         cudnn.benchmark = True
 
     if args.resume:
